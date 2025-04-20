@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronaldo Lacerda - Desenvolvedor FullStack</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- AOS Animate on Scroll -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <style>
+        :root {
+            --primary-color: #2A5C82;
+            --secondary-color: #1ABC9C;
+            --accent-color: #FF6B6B;
+            --dark-gray: #2C3E50;
+            --light-gray: #ECF0F1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            scroll-behavior: smooth;
+            background: var(--light-gray);
+        } scroll-behavior: smooth;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(26, 188, 156, 0.4);
+            background: #16A085;
+        }
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        nav .logo {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        nav ul li a:hover {
+            color: var(--secondary-color);
+            background: rgba(26, 188, 156, 0.1);
+        }
+        .hero-about-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 100vh;
+        }
+        /* Hero */
+        header {
+            flex: 1 1 50%;
+            min-height: 100vh;
+            background: url('https://source.unsplash.com/WLUHO9A_xik/1600x900') center/cover no-repeat fixed;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(42, 92, 130, 0.9), rgba(26, 188, 156, 0.8));
+        }
+        header .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+        header .hero-content img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        header .hero-content h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        header .hero-content p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+        }
+        header .hero-content .btn {
+            background: #ffd700;
+            color: #333;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background .3s;
+        }
+        header .hero-content .btn:hover {
+            background: #ffc200;
+        }
+
+        section {
+            padding: 80px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::after {
+            content: '';
+            width: 50px;
+            height: 4px;
+            background: #ffd700;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+        }
+
+        /* About */
+        #about {
+            flex: 1 1 50%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 40px 20px;
+        }
+        #about .row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        #about .row .col-6 {
+            width: 50%;
+            padding: 20px;
+        }
+        #about img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        #about .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 0 30px;
+        }
+        #about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        /* Services */
+        #services {
+            background: url('https://source.unsplash.com/2EJCSULRwC8/1600x900') center/cover no-repeat fixed;
+            position: relative;
+            color: #fff;
+        }
+        #services::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        #services .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            position: relative;
+            z-index: 2;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            width: 280px;
+            margin: 15px;
+            text-align: center;
+            transition: transform .3s, background .3s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+        .service-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        .service-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Skills */
+        #skills {
+            background: #f9f9f9;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .skill-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform .3s;
+        }
+        .skill-box:hover {
+            transform: translateY(-10px);
+        }
+        .skill-box i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .skill-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Contact */
+        #contact {
+            background: url('https://source.unsplash.com/QXevDflbl8A/1600x900') center/cover no-repeat fixed;
+            position: relative;
+            color: #fff;
+        }
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+        #contact .contact-form {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+        }
+        #contact button {
+            background: #ffd700;
+            color: #333;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .3s;
+        }
+        #contact button:hover {
+            background: #ffc200;
+        }
+
+        footer {
+            background: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer .social-icons a {
+            color: #ccc;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color .3s;
+        }
+        footer .social-icons a:hover {
+            color: #ffd700;
+        }
+        @media (max-width: 768px) {
+            #about .col-6 { width: 100%; }
+        }
+        #contact-cta {
+            background: linear-gradient(135deg, #4f6d8f, #556f7f); /* Gradiente suave */
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        #contact-cta .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #contact-cta h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #contact-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background-color: #f1c40f; /* Amarelo */
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #f39c12; /* Amarelo mais escuro */
+            transform: scale(1.05);
+        }
+
+        .cta-btn:active {
+            transform: scale(1);
+        }
+
+        .header-social-icons {
+            display: flex;
+            gap: 15px;
+            margin-left: 30px;
+        }
+
+        .header-social-icons a {
+            color: var(--dark-gray);
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .header-social-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero-social-icons {
+            margin-top: 30px;
+            display: flex;
+            gap: 25px;
+            justify-content: left;
+            margin-left: 5px;
+        }
+
+        .hero-social-icons a {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .hero-social-icons a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        /* Estilo do botão do WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Tamanho maior para desktop */
+        @media (min-width: 768px) {
+            .whatsapp-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 35px;
+            }
+        }
+
+        /* Tamanho menor para mobile */
+        @media (max-width: 767px) {
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        /* Adicionar ícone do WhatsApp nos grupos de ícones */
+        .header-social-icons a.whatsapp,
+        .hero-social-icons a.whatsapp,
+        footer .social-icons a.whatsapp {
+            color: #25D366;
+        }
+
+        .header-social-icons a.whatsapp:hover,
+        .hero-social-icons a.whatsapp:hover,
+        footer .social-icons a.whatsapp:hover {
+            color: #128C7E;
+        }
+
+        @media (max-width: 768px) {
+            .header-social-icons {
+                display: none;
+            }
+        }
+        /* Menu Hamburguer para Mobile */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        /* Ajustes para Mobile */
+        @media (max-width: 768px) {
+            /* Menu Hamburguer */
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+                transition: all 0.5s ease;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            /* Ajuste do Hero */
+            header .hero-content {
+                padding-top: 80px;
+                text-align: center;
+            }
+            
+            header .hero-content img {
+                width: 180px;
+                height: 180px;
+            }
+            
+            header .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            header .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-social-icons {
+                justify-content: center;
+            }
+            
+            /* Layout da seção sobre */
+            .hero-about-wrapper {
+                flex-direction: column;
+            }
+            
+            header, #about {
+                min-height: auto;
+                height: auto;
+                padding: 80px 20px;
+            }
+            
+            #about .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Ajustes para telas muito pequenas */
+        @media (max-width: 480px) {
+            header .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .btn, .cta-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5551991572716" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Nav Atualizado com Menu Hamburguer -->
+    <nav data-aos="fade-down">
+        <div class="logo">RonaldoLacerda</div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#skills">Ferramentas</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+        <div class="header-social-icons">
+            <a href="https://github.com/ronaldolacerda" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ronaldo-lacerda-dev/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:ronaldolacerdadasilva@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/5551991572716" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </nav>
+
+    <div class="hero-about-wrapper">
+        <!-- Hero -->
+        <header id="home">
+            <div class="hero-content" data-aos="zoom-in">
+                <img src="\p.jpeg" alt="Foto de Ronaldo Lacerda">
+                <h1>Ronaldo Lacerda</h1>
+                <p>Desenvolvedor Web FullStack | Laravel • PHP • JavaScript</p>
+                <a href="#contact" class="btn">Entre em Contato</a>
+                <div class="hero-social-icons">
+                    <a href="https://github.com/ronaldolacerda" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/ronaldo-lacerda-dev/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:ronaldolacerdadasilva@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://wa.me/5551991572716" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </header>
+
+        <!-- About -->
+        <section id="about">
+            <div class="container" data-aos="fade-left">
+                <div class="section-title"><h2>Sobre Mim</h2></div>
+                <p>Formado em Análise e Desenvolvimento de Sistemas pela UniRitter (2022-2024), sou Desenvolvedor Web FullStack com experiência em manutenção e melhoria contínua de sistemas utilizando Laravel, MySQL, PHP, jQuery, JavaScript, JSON, APIs, Ajax e conhecimentos em Python.</p>
+                <p>Com experiência em projetos desafiadores, meu foco está em criar soluções práticas que impactem diretamente nos resultados dos negócios. Garantindo não só a implementação de novas funcionalidades, mas também a otimização contínua de sistemas existentes para maior performance e escalabilidade. Meu objetivo é transformar problemas complexos em soluções simples e eficientes.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up"><h2>Meus Serviços</h2></div>
+            <div class="service-list" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Criação de Sites</h3>
+                    <p>Desenvolvimento de sites responsivos, com design moderno e otimização de performance.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Sistemas Inteligentes</h3>
+                    <p>Implementação de sistemas customizados para automação e inteligência de negócios.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-plug"></i>
+                    <h3>Integrações via API</h3>
+                    <p>Conexão de sistemas através de APIs RESTful para troca de dados e funcionalidades.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Dashboards e Relatórios</h3>
+                    <p>Desenvolvimento de dashboards personalizados e relatórios dinâmicos, integrando dados em tempo real e visualizando métricas importantes para a tomada de decisão.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Otimização e Performance</h3>
+                    <p>Melhorias no tempo de carregamento, otimização de imagens e código, além de implementar práticas de SEO para garantir que seu site seja rápido e bem posicionado nos motores de busca.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Suporte e Manutenção</h3>
+                    <p>Suporte contínuo e manutenção de sistemas e aplicações, garantindo a correção de bugs, atualizações de segurança e melhorias de desempenho.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Chamada para Ação -->
+    <section id="contact-cta">
+        <div class="container">
+            <h2>Pronto para o Próximo Passo?</h2>
+            <p>Entre em contato para discutir seu projeto ou solicite um orçamento personalizado!</p>
+            <a href="#contact" class="cta-btn">Solicitar Orçamento</a>
+        </div>
+    </section>
+
+
+
+    <!-- Skills -->
+    <section id="skills">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title"><h2>Ferramentas & Tecnologias</h2></div>
+            <div class="skills-grid">
+                <div class="skill-box" data-aos="flip-left"><i class="fab fa-laravel"></i><h4>Laravel</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-database"></i><h4>MySQL</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="200"><i class="fab fa-php"></i><h4>PHP</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="300"><i class="fab fa-js-square"></i><h4>JavaScript</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="400"><i class="fab fa-git-alt"></i><h4>Git</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="500"><i class="fas fa-code-branch"></i><h4>jQuery</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="600"><i class="fab fa-bootstrap"></i><h4>Bootstrap</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="700"><i class="fas fa-network-wired"></i><h4>APIs</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="800"><i class="fab fa-python"></i><h4>Python</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="1000"><i class="fas fa-brain"></i><h4>Scikit-Learn</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="1100"><i class="fab fa-css3"></i><h4>Tailwind CSS</h4></div>
+                <div class="skill-box" data-aos="flip-left" data-aos-delay="1200"><i class="fas fa-sync-alt"></i><h4>AJAX</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container" data-aos="zoom-in">
+            <div class="section-title"><h2>Contato</h2></div>
+            <div class="contact-form">
+                <form action="mailto:ronaldolacerdadasilva@gmail.com" method="post" enctype="text/plain">
+                    <input type="text" name="Nome" placeholder="Seu Nome" required>
+                    <input type="email" name="Email" placeholder="Seu Email" required>
+                    <textarea name="Mensagem" rows="6" placeholder="Sua Mensagem" required></textarea>
+                    <button type="submit">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer data-aos="fade-up">
+        <div class="social-icons">
+            <a href="https://github.com/ronaldolacerda" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ronaldo-lacerda-dev/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:ronaldolacerdadasilva@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://wa.me/5551991572716" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 Ronaldo Lacerda - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- AOS & Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        
+        // Menu Hamburguer
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('nav ul').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
