@@ -329,6 +329,28 @@
             background: #ffc200;
         }
 
+        .alert-success {
+            position: fixed;
+            top: 70px; /* Abaixo da barra de navegação */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1ABC9C; /* Verde (secondary-color) para sucesso */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            z-index: 1001; /* Acima de tudo */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .alert-success.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         footer {
             background: #222;
             color: #ccc;
@@ -587,6 +609,9 @@
 </head>
 
 <body>
+    <div id="success-alert" class="alert-success">
+        <i class="fas fa-check-circle"></i> Enviado com sucesso!
+    </div>
     <!-- Botão flutuante do WhatsApp -->
     <a href="https://wa.me/5551991572716" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
@@ -718,7 +743,7 @@
             <div class="contact-form">
                 <form action="https://formsubmit.co/ronaldolacerdadasilva@gmail.com" method="POST">
                     <input type="text" name="Nome" placeholder="Seu Nome" required>
-                    <input type="hidden" name="_next" value="https://ronaldolacerda.github.io/home/">
+                    <input type="hidden" name="_next" value="https://ronaldolacerda.github.io/home?sucess">
                     <input type="email" name="Email" placeholder="Seu Email" required>
                     <textarea name="Mensagem" rows="6" placeholder="Sua Mensagem" required></textarea>
                     <button type="submit">Enviar Mensagem</button>
@@ -754,6 +779,30 @@
                 document.querySelector('nav ul').classList.remove('active');
             });
         });
+
+        function checkFormSubmission() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Verifica se o parâmetro 'sucess' existe na URL
+            if (urlParams.has('sucess')) {
+                const alertBox = document.getElementById('success-alert');
+                
+                // 1. Mostrar o alerta
+                alertBox.classList.add('show');
+                
+                // 2. Fazer o alerta desaparecer após 4 segundos (4000ms)
+                setTimeout(() => {
+                    alertBox.classList.remove('show');
+                    
+                    // 3. Remover o parâmetro da URL para que não apareça novamente ao recarregar
+                    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                    window.history.replaceState(null, null, cleanUrl);
+                }, 4000); // 4 segundos
+            }
+        }
+        
+        // Chamar a função de checagem quando a página carregar
+        window.addEventListener('load', checkFormSubmission);
     </script>
 </body>
 
